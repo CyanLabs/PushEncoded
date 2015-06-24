@@ -7,12 +7,12 @@ Public Class PushEncoded
     Dim fsw As New FileSystemWatcher() ' Created FileSystemWatcher to monitor folder (Hard Coded)
     Protected Overrides Sub OnStart(ByVal args() As String)
         AddHandler fsw.Created, New FileSystemEventHandler(AddressOf File_Created) ' Creates the handler for the when new file is created.
-        fsw.Path = "D:\Media\Youtube Recordings\AutoEncode\" ' Hardcoded path [TODO: add optional parameter].
+        fsw.Path = "D:\Media\Youtube Recordings\AutoEncode\Output\" ' Hardcoded path [TODO: add optional parameter].
         fsw.EnableRaisingEvents = True ' Enables the detection of a new file.
         fsw.Filter = "*.mp4"
     End Sub
     Public Sub File_Created(ByVal obj As Object, ByVal e As FileSystemEventArgs)
-        PushMe(e.Name & " finished encoding", "The following file has finished being rendered" & vbNewLine & vbNewLine & e.FullPath) 'Sends the push notification to pushbullet API.
+        PushMe("Encoding Finished", e.Name & " has finished being encoded by Adobe Media Encoder.") 'Sends the push notification to pushbullet API.
     End Sub
     Sub PushMe(title, message)
         Try
